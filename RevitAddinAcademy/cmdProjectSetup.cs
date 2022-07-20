@@ -97,8 +97,8 @@ namespace RevitAddinAcademy
             ViewPlan curRCP = ViewPlan.Create(doc, curRCPVFT.Id, newLevel.Id);
             curRCP.Name = curRCP.Name + " RCP";
 
-            ViewSheet viewSheet = ViewSheet.Create(doc, collecotr2.firstelementID);
-            Viewport viewPort = Viewport.Create(doc, newsheet.Id, new XYZ(0, 0, 0));
+            ViewSheet viewSheet = ViewSheet.Create(doc, collector2.firstelementID);
+            Viewport viewPort = Viewport.Create(doc, newSheet.Id, new XYZ(0, 0, 0));
 
             newSheet.Name = "Test Sheet";
             newSheet.SheetNumber = "a10010101";
