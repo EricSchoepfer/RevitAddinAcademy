@@ -42,6 +42,9 @@ namespace RevitAddinAcademy
                 filePath = dialog.FileName;
             }
 
+
+
+
             Forms.FolderBrowserDialog folderFDialog = new Forms.FolderBrowserDialog();
 
             string folderPath = "";
@@ -123,7 +126,7 @@ namespace RevitAddinAcademy
 
             foreach(View curView in collector)
             {
-                if (curView.Name == viewName)
+                if (curView.Name == viewName);
             }
         }
 
