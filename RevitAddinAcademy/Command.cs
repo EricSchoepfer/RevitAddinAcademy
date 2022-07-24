@@ -69,125 +69,125 @@ namespace RevitAddinAcademy
 
 
                         //    2 methods similar as above
-                        //GraphicsStyle curGS = curve.LineStyle as GraphicsStyle;
+                        //GraphicsStyle curGS = curve.LineStyle as GraphicsStyle;  (METHOD 1)
                         GraphicsStyle curGS = (GraphicsStyle)curve.LineStyle;
-
-
-                        //switch (curGS.Name)
-                        //{
-                        //case "<Medium>";
-                        //Debug.Print("found a medium line");
-
-
-                        //case "<Thin>";
-                        //Debug.Print("found a thin  line");
-
-
-
 
                         Curve curCurve = curve.GeometryCurve;
                         XYZ startPoint = curCurve.GetEndPoint(0);
                         XYZ endPoint = curCurve.GetEndPoint(1);
 
-                        //case "<Wide>";
-                        Pipe newPipe = Pipe.Create(
-                        doc,
-                        curSystemType.Id,
-                        curPipeType.Id,
-                        curLevel.Id,
-                        startPoint,
-                        endPoint);
+
+
+                        switch (curGS.Name)
+                        {
+                            case "<Medium>":
+                                Debug.Print("found a medium line");
+                                break;
+
+                            case "<Thin Lines>":
+                                Debug.Print("found a thin  line");
+                                break;
+
+                            case "<Wide Lines>":
+                                Pipe newPipe = Pipe.Create(
+                                doc,
+                                curSystemType.Id,
+                                curPipeType.Id,
+                                curLevel.Id,
+                                startPoint,
+                                endPoint);
+                                break;
+
+                            default:
+                                Debug.Print("Found Something Else");
+                                break;
+                        }
+
+
+                        //Original wall create method--------------------------------------------------------------
+                        //Wall newWall = Wall.Create(doc, curCurve, curWallType.Id, curLevel.Id, 15, 0, false, false);
+                        //----------------------------------------------------------------------------------------------
+
+                        Debug.Print(curGS.Name);
                     }
+
+                    t.Commit();
                 }
 
 
+                TaskDialog.Show("Complete", curveList.Count.ToString());
+                return Result.Succeeded;
 
 
-
-                //Original wall create method--------------------------------------------------------------
-                //Wall newWall = Wall.Create(doc, curCurve, curWallType.Id, curLevel.Id, 15, 0, false, false);
-                //----------------------------------------------------------------------------------------------
-
-
-        t.Commit();
-    }
-
-
-            TaskDialog.Show("Complete", curveList.Count.ToString());
-            return Result.Succeeded;
-
-
+            }
 
             //Methods------------------------------------------------------------------
 
+
         }
-        private WallType GetWallTypeByName(Document doc, string wallTyoeName)
-        {
-            FilteredElementCollector collector = new FilteredElementCollector(doc);
-            collector.OfClass(typeof(WallType));
-
-            foreach (Element curElem in collector)
+            private WallType GetWallTypeByName(Document doc, string wallTyoeName)
             {
-                WallType wallType = curElem as WallType;
+             FilteredElementCollector collector = new FilteredElementCollector(doc);
+             collector.OfClass(typeof(WallType));
 
-                if(wallType.Name == wallTyoeName)
-                 return wallType;
+                foreach (Element curElem in collector)
+                {
+                 WallType wallType = curElem as WallType;
+
+                    if(wallType.Name == wallTyoeName)
+                     return wallType;
+                }
+                return null;
             }
-            return null;
-        }
 
 
-        private Level GetLevelByName(Document doc, string LevelName)
-        {
-            FilteredElementCollector collector = new FilteredElementCollector(doc);
-            collector.OfClass(typeof(Level));
+             private Level GetLevelByName(Document doc, string LevelName)
+             {
+                FilteredElementCollector collector = new FilteredElementCollector(doc);
+                collector.OfClass(typeof(Level));
 
-            foreach (Element curElem in collector)
-            {
-                Level Level = curElem as Level;
+                foreach (Element curElem in collector)
+                {
+                 Level Level = curElem as Level;
 
-                if (Level.Name == LevelName)
+                    if (Level.Name == LevelName)
                     return Level;
-            }
-            return null;
-        }
+                }
+                    return null;
+             }
 
 
 
-        private MEPSystemType GetSystemTypeByName(Document doc, string TypeName)
-        {
-            FilteredElementCollector collector = new FilteredElementCollector(doc);
-            collector.OfClass(typeof(MEPSystemType));
-
-            foreach (Element curElem in collector)
+            private MEPSystemType GetSystemTypeByName(Document doc, string TypeName)
             {
-                MEPSystemType curType = curElem as MEPSystemType;
+                FilteredElementCollector collector = new FilteredElementCollector(doc);
+                 collector.OfClass(typeof(MEPSystemType));
 
-                if (curType.Name == TypeName)
+                foreach (Element curElem in collector)
+                {
+                    MEPSystemType curType = curElem as MEPSystemType;
+
+                    if (curType.Name == TypeName)
                     return curType;
+                }
+                return null;
             }
-            return null;
-        }
 
 
 
-        private PipeType GetPipeTypeByName(Document doc, string TypeName)
-        {
-            FilteredElementCollector collector = new FilteredElementCollector(doc);
-            collector.OfClass(typeof(PipeType));
-
-            foreach (Element curElem in collector)
+            private PipeType GetPipeTypeByName(Document doc, string TypeName)
             {
-                PipeType curType = curElem as PipeType;
+                FilteredElementCollector collector = new FilteredElementCollector(doc);
+                collector.OfClass(typeof(PipeType));
 
-                if (curType.Name == TypeName)
+                foreach (Element curElem in collector)
+                {
+                    PipeType curType = curElem as PipeType;
+
+                    if (curType.Name == TypeName)
                     return curType;
+                }
+                    return null;
             }
-            return null;
         }
-
-
-
-
     }
-}
