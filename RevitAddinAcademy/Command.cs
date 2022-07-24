@@ -20,13 +20,16 @@ namespace RevitAddinAcademy
     public class Command : IExternalCommand
     {
         public Result Execute(
-          ExternalCommandData commandData,
-          ref string message,
-          ElementSet elements)
+        ExternalCommandData commandData,
+        ref string message,
+        ElementSet elements)
+
+
+
         {
             UIApplication uiapp = commandData.Application;
             UIDocument uidoc = uiapp.ActiveUIDocument;
-            
+
             Application app = uiapp.Application;
             Document doc = uidoc.Document;
 
@@ -35,71 +38,78 @@ namespace RevitAddinAcademy
 
 
             WallType curWallType = GetWallTypeByName(doc, @"Generic - 8""");
-            Level curLevel = GetLevelByName(curLevel "Level 1");
+            Level curLevel = GetLevelByName(doc, "Level 1");
 
 
+            using (Transaction t = new Transaction(doc))
 
-            
-            foreach (Element element in picklist)
             {
-                if (element is CurveElement)
+                t.Start("Create Revvit Stuff");
 
+                foreach (Element element in picklist)
                 {
+                    if (element is CurveElement)
 
-
-                    CurveElement curve = (CurveElement)element;
-                    CurveElement curve2 = element as CurveElement;
-
-                    curveList.Add(curve);
-
-                    GraphicsStyle curGS = curve.LineStyle as GraphicsStyle;
-
-
-                    switch (curGS.Name)
                     {
-                        case "<Medium>";
-                            Debug.Print("found a medium line");
-                                break;
 
-                            case "<Think Lines>";
-                            Debug.Print("found a think  line");
-                            break;
+                        // casting to element type
+                        CurveElement curve = (CurveElement)element;
+                        //similar method
+                        CurveElement curve2 = element as CurveElement;
 
-                            case "<Wide Lines>";
-                            Pipe newPipe = Pipe.Create(
-                                doc,
-                                CurSystemType.Id,
-                                curPipeType.Id,
-                                curLevel.Id,
-                                startPoint,
-                                endpoint);
+
+
+                        curveList.Add(curve);
+
+
+                        //    2 methods similar as above
+                        //GraphicsStyle curGS = curve.LineStyle as GraphicsStyle;
+                        GraphicsStyle curGS = (GraphicsStyle)curve.LineStyle;
+
+
+                        //switch (curGS.Name)
+                        //{
+                        //case "<Medium>";
+                        //Debug.Print("found a medium line");
+
+
+                        //case "<Thin>";
+                        //Debug.Print("found a thin  line");
+
+
+                        //case "<Wide>";
+                        // Pipe newPipe = Pipe.Create(
+                        // doc,
+                        //CurSystemType.Id,
+                        //curPipeType.Id,
+                        //curLevel.Id,
+                        //startPoint,
+                        //endpoint);
+                        //}
+
+                        Curve curCurve = curve.GeometryCurve;
+                        XYZ startPoint = curCurve.GetEndPoint(0);
+                        XYZ endPoint = curCurve.GetEndPoint(1);
+
+                        Wall newWall = Wall.Create(doc, curCurve, curWallType.Id, curLevel.Id, 15, 0, false, false);
+
+
+                        Debug.Print(curGS.Name);
+
                     }
-
-                    Curve curCurve = curve.GeometryCurve;
-                    XYZ startPoint = curCurve.GetEndPoint(0);
-                    XYZ endPoint = curCurve.GetEndPoint(1);
-
-                    //Wall newWall = Wall.Create(doc, curCurve, curWallType.Id, curLevel.Id, 15, 0, false, false);
-                   
-                    
-                    Debug.Print(curGS.Name);
-
                 }
+
+                t.Commit();
             }
 
-
-
-
-           TaskDialog.Show("Complete", curveList.Count.ToString());
-
-
+            TaskDialog.Show("Complete", curveList.Count.ToString());
             return Result.Succeeded;
+
+
+
+            //Methods------------------------------------------------------------------
+
         }
-
-
-
-
-
         private WallType GetWallTypeByName(Document doc, string wallTyoeName)
         {
             FilteredElementCollector collector = new FilteredElementCollector(doc);
@@ -108,27 +118,29 @@ namespace RevitAddinAcademy
             foreach (Element curElem in collector)
             {
                 WallType wallType = curElem as WallType;
-                if (curElem.Name == wallTyoeName)
-                    return wallType;
 
+                if(wallType.Name == wallTyoeName)
+                 return wallType;
             }
-
+            return null;
         }
 
-        private Level GetLevelByName(Document doc, string Level)
+
+        private Level GetLevelByName(Document doc, string LevelName)
         {
             FilteredElementCollector collector = new FilteredElementCollector(doc);
             collector.OfClass(typeof(Level));
 
             foreach (Element curElem in collector)
             {
-                WallType wallType = curElem as WallType;
-                if (curElem.Name == Level)
-                    return curLevel;
+                Level Level = curElem as Level;
 
+                if (Level.Name == LevelName)
+                    return Level;
             }
-
+            return null;
         }
+
 
 
 
