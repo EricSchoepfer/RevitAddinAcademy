@@ -10,6 +10,7 @@ using System.Diagnostics;
 using Autodesk.Revit.DB.Plumbing;
 using Autodesk.Revit.DB.Mechanical;
 using Autodesk.Revit.DB.Structure;
+using Autodesk.Revit.DB.Electrical;
 using Autodesk.Revit.DB.Architecture;
 using excel = Microsoft.Office.Interop.Excel;
 using Forms = System.Windows.Forms;
@@ -42,6 +43,9 @@ namespace RevitAddinAcademy
             WallType curWallType = GetWallTypeByName(doc, @"Generic - 8""");
             Level curLevel = GetLevelByName(doc, "Level 1");
 
+
+            MEPSystemType curSystemType = GetSystemTypeByName(doc, "Domestic Hot Water");
+            PipeType curPipeType = GetPipeTypeByName(doc, "Default");
 
             using (Transaction t = new Transaction(doc))
 
@@ -79,30 +83,35 @@ namespace RevitAddinAcademy
                         //Debug.Print("found a thin  line");
 
 
-                        //case "<Wide>";
-                        // Pipe newPipe = Pipe.Create(
-                        // doc,
-                        //CurSystemType.Id,
-                        //curPipeType.Id,
-                        //curLevel.Id,
-                        //startPoint,
-                        //endpoint);
-                        //}
+
 
                         Curve curCurve = curve.GeometryCurve;
                         XYZ startPoint = curCurve.GetEndPoint(0);
                         XYZ endPoint = curCurve.GetEndPoint(1);
 
-                        Wall newWall = Wall.Create(doc, curCurve, curWallType.Id, curLevel.Id, 15, 0, false, false);
-
-
-                        Debug.Print(curGS.Name);
-
+                        //case "<Wide>";
+                        Pipe newPipe = Pipe.Create(
+                        doc,
+                        curSystemType.Id,
+                        curPipeType.Id,
+                        curLevel.Id,
+                        startPoint,
+                        endPoint);
                     }
                 }
 
-                t.Commit();
-            }
+
+
+
+
+                //Original wall create method--------------------------------------------------------------
+                //Wall newWall = Wall.Create(doc, curCurve, curWallType.Id, curLevel.Id, 15, 0, false, false);
+                //----------------------------------------------------------------------------------------------
+
+
+        t.Commit();
+    }
+
 
             TaskDialog.Show("Complete", curveList.Count.ToString());
             return Result.Succeeded;
@@ -139,6 +148,40 @@ namespace RevitAddinAcademy
 
                 if (Level.Name == LevelName)
                     return Level;
+            }
+            return null;
+        }
+
+
+
+        private MEPSystemType GetSystemTypeByName(Document doc, string TypeName)
+        {
+            FilteredElementCollector collector = new FilteredElementCollector(doc);
+            collector.OfClass(typeof(MEPSystemType));
+
+            foreach (Element curElem in collector)
+            {
+                MEPSystemType curType = curElem as MEPSystemType;
+
+                if (curType.Name == TypeName)
+                    return curType;
+            }
+            return null;
+        }
+
+
+
+        private PipeType GetPipeTypeByName(Document doc, string TypeName)
+        {
+            FilteredElementCollector collector = new FilteredElementCollector(doc);
+            collector.OfClass(typeof(PipeType));
+
+            foreach (Element curElem in collector)
+            {
+                PipeType curType = curElem as PipeType;
+
+                if (curType.Name == TypeName)
+                    return curType;
             }
             return null;
         }
