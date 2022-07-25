@@ -46,6 +46,8 @@ namespace RevitAddinAcademy
 
             MEPSystemType curSystemType = GetSystemTypeByName(doc, "Domestic Hot Water");
             PipeType curPipeType = GetPipeTypeByName(doc, "Default");
+            MEPSystemType curDuctType = GetSystemTypeByName(doc, "Default");
+
 
             using (Transaction t = new Transaction(doc))
 
@@ -72,47 +74,52 @@ namespace RevitAddinAcademy
                         //GraphicsStyle curGS = curve.LineStyle as GraphicsStyle;  (METHOD 1)
                         GraphicsStyle curGS = (GraphicsStyle)curve.LineStyle;
 
-                        Curve curCurve = curve.GeometryCurve;
-                        XYZ startPoint = curCurve.GetEndPoint(0);
-                        XYZ endPoint = curCurve.GetEndPoint(1);
+                                                
+
+                                    Curve curCurve = curve.GeometryCurve;
+                                    XYZ startPoint = curCurve.GetEndPoint(0);
+                                    XYZ endPoint = curCurve.GetEndPoint(1);
 
 
 
-                        switch (curGS.Name)
-                        {
-                            case "<Medium>":
-                                Debug.Print("found a medium line");
-                                break;
+                                    switch (curGS.Name)
+                                    {
+                                        case "<Medium>":
+                                            Debug.Print("found a medium line");
+                                            break;
 
-                            case "<Thin Lines>":
-                                Debug.Print("found a thin  line");
-                                break;
+                                        case "<Thin Lines>":
+                                            Debug.Print("found a thin  line");
+                                            break;
 
-                            case "<Wide Lines>":
-                                Pipe newPipe = Pipe.Create(
-                                doc,
-                                curSystemType.Id,
-                                curPipeType.Id,
-                                curLevel.Id,
-                                startPoint,
-                                endPoint);
-                                break;
+                                        case "<Wide Lines>":
+                                            Pipe newPipe = Pipe.Create(
+                                            doc,
+                                            curSystemType.Id,
+                                            curPipeType.Id,
+                                            curLevel.Id,
+                                            startPoint,
+                                            endPoint);
+                                            break;
 
-                            default:
-                                Debug.Print("Found Something Else");
-                                break;
-                        }
+                                        default:
+                                            Debug.Print("Found Something Else");
+                                            break;
+                                    }
+                               
 
 
                         //Original wall create method--------------------------------------------------------------
-                        //Wall newWall = Wall.Create(doc, curCurve, curWallType.Id, curLevel.Id, 15, 0, false, false);
+                     //Wall newWall = Wall.Create(doc, curCurve, curWallType.Id, curLevel.Id, 15, 0, false, false);
                         //----------------------------------------------------------------------------------------------
 
                         Debug.Print(curGS.Name);
                     }
 
-                    t.Commit();
+                   
                 }
+
+                t.Commit();
 
 
                 TaskDialog.Show("Complete", curveList.Count.ToString());
@@ -190,4 +197,27 @@ namespace RevitAddinAcademy
                     return null;
             }
         }
-    }
+}
+
+
+
+    //case "<M-DUCT>":
+                                //Duct newDuct = Duct.Create(
+                                //doc,
+                                //curSystemType.Id,
+                                //curPipeType.Id,
+                                //curLevel.Id,
+                                //startPoint,
+                                //endPoint);
+        //break;
+
+
+//case "<P-PIPE>":
+                               // Pipe newPipe = Pipe.Create(
+                                //doc,
+                                //curSystemType.Id,
+                                //curPipeType.Id,
+                                //curLevel.Id,
+                                //startPoint,
+                                //endPoint);
+//break;
