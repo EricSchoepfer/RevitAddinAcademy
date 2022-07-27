@@ -128,73 +128,73 @@ namespace RevitAddinAcademy
 
             }
 
-            //Methods------------------------------------------------------------------
+                    //Methods------------------------------------------------------------------
 
 
-        }
-            private WallType GetWallTypeByName(Document doc, string wallTyoeName)
-            {
-             FilteredElementCollector collector = new FilteredElementCollector(doc);
-             collector.OfClass(typeof(WallType));
-
-                foreach (Element curElem in collector)
-                {
-                 WallType wallType = curElem as WallType;
-
-                    if(wallType.Name == wallTyoeName)
-                     return wallType;
                 }
-                return null;
-            }
+                    private WallType GetWallTypeByName(Document doc, string wallTyoeName)
+                    {
+                     FilteredElementCollector collector = new FilteredElementCollector(doc);
+                     collector.OfClass(typeof(WallType));
+
+                        foreach (Element curElem in collector)
+                        {
+                         WallType wallType = curElem as WallType;
+
+                            if(wallType.Name == wallTyoeName)
+                             return wallType;
+                        }
+                        return null;
+                    }
 
 
-             private Level GetLevelByName(Document doc, string LevelName)
-             {
-                FilteredElementCollector collector = new FilteredElementCollector(doc);
-                collector.OfClass(typeof(Level));
+                     private Level GetLevelByName(Document doc, string LevelName)
+                     {
+                        FilteredElementCollector collector = new FilteredElementCollector(doc);
+                        collector.OfClass(typeof(Level));
 
-                foreach (Element curElem in collector)
-                {
-                 Level Level = curElem as Level;
+                        foreach (Element curElem in collector)
+                        {
+                         Level Level = curElem as Level;
 
-                    if (Level.Name == LevelName)
-                    return Level;
-                }
-                    return null;
-             }
-
-
-
-            private MEPSystemType GetSystemTypeByName(Document doc, string TypeName)
-            {
-                FilteredElementCollector collector = new FilteredElementCollector(doc);
-                 collector.OfClass(typeof(MEPSystemType));
-
-                foreach (Element curElem in collector)
-                {
-                    MEPSystemType curType = curElem as MEPSystemType;
-
-                    if (curType.Name == TypeName)
-                    return curType;
-                }
-                return null;
-            }
+                            if (Level.Name == LevelName)
+                            return Level;
+                        }
+                            return null;
+                     }
 
 
 
-            private PipeType GetPipeTypeByName(Document doc, string TypeName)
-            {
-                FilteredElementCollector collector = new FilteredElementCollector(doc);
-                collector.OfClass(typeof(PipeType));
+                    private MEPSystemType GetSystemTypeByName(Document doc, string TypeName)
+                    {
+                        FilteredElementCollector collector = new FilteredElementCollector(doc);
+                         collector.OfClass(typeof(MEPSystemType));
 
-                foreach (Element curElem in collector)
-                {
-                    PipeType curType = curElem as PipeType;
+                        foreach (Element curElem in collector)
+                        {
+                            MEPSystemType curType = curElem as MEPSystemType;
 
-                    if (curType.Name == TypeName)
-                    return curType;
-                }
-                    return null;
+                            if (curType.Name == TypeName)
+                            return curType;
+                        }
+                        return null;
+                    }
+
+
+
+                    private PipeType GetPipeTypeByName(Document doc, string TypeName)
+                    {
+                        FilteredElementCollector collector = new FilteredElementCollector(doc);
+                        collector.OfClass(typeof(PipeType));
+
+                        foreach (Element curElem in collector)
+                        {
+                            PipeType curType = curElem as PipeType;
+
+                            if (curType.Name == TypeName)
+                            return curType;
+                        }
+                            return null;
             }
         }
 }
