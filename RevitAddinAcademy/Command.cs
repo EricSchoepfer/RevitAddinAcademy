@@ -33,6 +33,9 @@ namespace RevitAddinAcademy
             UIApplication uiapp = commandData.Application;
             UIDocument uidoc = uiapp.ActiveUIDocument;
 
+            Application app = uiapp.Application;
+            Document doc = uidoc.Document;
+
 
             Employee emp1 = new Employee("Joe", 24, "blue,red,white");
             Employee emp2 = new Employee("Mary", 26, "green,red,brown");
@@ -55,22 +58,17 @@ namespace RevitAddinAcademy
 
 
 
-            List<SpatialElement> spatialElements = Utilities.GetAllRooms(Doc);
-            foreach (SpatialElement curRoom in roomList)
-            {
-                LocationPoint
-            } ();
+            List<SpatialElement> roomList = Utilities.GetAllRooms(doc);
 
+            foreach(SpatialElement curRoom in roomList)
+            {
+                LocationPoint roomLocation = curRoom.Location as LocationPoint;
+                XYZ roomPoint = roomLocation.Point;
+            } 
+
+
+            return Result.Succeeded;
         }
     }
 
 }
-
-
-           
-
-
-            Application app = uiapp.Application;
-            Document doc = uidoc.Document;
-
-            return Result.Succeeded;
