@@ -5,22 +5,22 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace RevitAddinAcademy
-{ using Autodesk.Revit.ApplicationServices;
-    using Autodesk.Revit.Attributes;
-    using Autodesk.Revit.DB;
-    using Autodesk.Revit.UI;
-    using Autodesk.Revit.UI.Selection;
-    using System;
-    using System.Collections.Generic;
-    using System.Diagnostics;
-    using Autodesk.Revit.DB.Plumbing;
-    using Autodesk.Revit.DB.Mechanical;
-    using Autodesk.Revit.DB.Structure;
-    using Autodesk.Revit.DB.Electrical;
-    using Autodesk.Revit.DB.Architecture;
-    using excel = Microsoft.Office.Interop.Excel;
-    using Forms = System.Windows.Forms;
-}
+using Autodesk.Revit.ApplicationServices;
+using Autodesk.Revit.Attributes;
+using Autodesk.Revit.DB;
+using Autodesk.Revit.UI;
+using Autodesk.Revit.UI.Selection;
+using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using Autodesk.Revit.DB.Plumbing;
+using Autodesk.Revit.DB.Mechanical;
+using Autodesk.Revit.DB.Structure;
+using Autodesk.Revit.DB.Electrical;
+using Autodesk.Revit.DB.Architecture;
+using excel = Microsoft.Office.Interop.Excel;
+using Forms = System.Windows.Forms;
+
 
 
 
@@ -89,12 +89,12 @@ public class Employees
 
 
 
-public static List<SpatialElements> GetAllRooms(Document doc)
+public static List<SpatialElement> GetAllRooms(Document doc)
 {
     FilteredElementCollector collector = new FilteredElementCollector(doc);
         collector.OfCategory(BuiltInCategory.OST_Rooms);
 
-    List<SpatialElement> roomList = colorList.Split(',').ToList();
+    List<SpatialElement> roomList = new List<SpatialElement>();
 
 
 }
