@@ -33,6 +33,38 @@ namespace RevitAddinAcademy
             UIApplication uiapp = commandData.Application;
             UIDocument uidoc = uiapp.ActiveUIDocument;
 
+
+            Employee emp1 = new Employee("Joe", 24, "blue,red,white");
+            Employee emp2 = new Employee("Mary", 26, "green,red,brown");
+            Employee emp3 = new Employee("Joe", 24, "blue,red,white");
+
+
+            List<Employee> empList = new List<Employee>();
+            empList.Add(emp1);
+            empList.Add(emp2);
+            empList.Add(emp3);
+
+            Employees allEmployee = new Employees(empList);
+
+            Debug.Print("There are " + allEmployee.GetEmployeeCount().ToString() + " employees.");
+
+
+
+
+            Debug.Print(Utilities.GetTextFromClass());
+
+
+
+            List<SpatialElement> spatialElements = Utilities.GetAllRooms(Doc);
+            foreach(SpatialElement curRoom in roomList)
+            {
+                LocationPoint 
+            } ();
+
+
+           
+
+
             Application app = uiapp.Application;
             Document doc = uidoc.Document;
 
