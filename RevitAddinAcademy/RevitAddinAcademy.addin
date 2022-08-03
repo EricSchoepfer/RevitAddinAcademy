@@ -17,4 +17,16 @@
     <VendorId>com.typepad.thebuildingcoder</VendorId>
     <VendorDescription>The Building Coder, http://thebuildingcoder.typepad.com</VendorDescription>
   </AddIn>
+	<AddIn Type="Application">
+		<Name>Application RevitAddinAcademy</Name>
+		<Assembly>RevitAddinAcademy.dll</Assembly>
+		<FullClassName>RevitAddinAcademy.App</FullClassName>
+		<ClientId>00ff918e-3758-4e6c-95ad-ef5e06ba5838</ClientId>
+		<VendorId>com.typepad.thebuildingcoder</VendorId>
+		<VendorDescription>The Building Coder, http://thebuildingcoder.typepad.com</VendorDescription>
+	</AddIn>
+
+
+
+
 </RevitAddIns>
