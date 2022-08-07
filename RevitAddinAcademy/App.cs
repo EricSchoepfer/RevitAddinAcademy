@@ -5,6 +5,8 @@ using Autodesk.Revit.ApplicationServices;
 using Autodesk.Revit.Attributes;
 using Autodesk.Revit.DB;
 using Autodesk.Revit.UI;
+using System.Diagnostics;
+using System.Reflection;
 
 #endregion
 
@@ -16,6 +18,14 @@ namespace RevitAddinAcademy
         {
             // Step 1:  Create Ribbon Tab
 
+                try
+                {
+                a.CreateRibbonTab("test Tab");
+                }
+            catch (Exception)
+                {
+                Debug.Print("Tab Already Exist");
+                }    
 
             // Step 2:  Create Ribbon Panel
 
