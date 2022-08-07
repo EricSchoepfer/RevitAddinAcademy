@@ -5,7 +5,7 @@
     <Name>Application RevitAddinAcademy</Name>
     <Assembly>RevitAddinAcademy.dll</Assembly>
     <FullClassName>RevitAddinAcademy.App</FullClassName>
-    <ClientId>DAD06FDC-D571-471D-810A-F94A801DBF85</ClientId>
+    <ClientId>1F38E3B3-F9C2-4A80-B446-4EDA4C958726</ClientId>
     <VendorId>com.typepad.thebuildingcoder</VendorId>
     <VendorDescription>The Building Coder, http://thebuildingcoder.typepad.com</VendorDescription>
   </AddIn>

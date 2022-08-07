@@ -7,6 +7,7 @@ using Autodesk.Revit.DB;
 using Autodesk.Revit.UI;
 using System.Diagnostics;
 using System.Reflection;
+using Autodesk.Revit.UI.Selection;
 
 #endregion
 
@@ -54,9 +55,16 @@ namespace RevitAddinAcademy
             return Result.Succeeded;
         }
 
-        private RibbonPanel CreateRibbonPanel(UIControlledApplication a, string tabName, string panelName)
+        private RibbonPanel CreateRibbonPanel(UIControlledApplication a,
+                                              string tabName,
+                                              string panelName)
         {
-            foreach(RibbonPanel tmpPanel in a.GetRibbonPanels(tabName))
+            if (tabName is null)
+            {
+                throw new ArgumentNullException(nameof(tabName));
+            }
+
+            foreach (RibbonPanel tmpPanel in a.GetRibbonPanels(tabName))
                 {
                     if(tmpPanel.Name == panelName)
                         return tmpPanel;
