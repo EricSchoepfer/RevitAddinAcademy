@@ -19,17 +19,17 @@ namespace RevitAddinAcademy
             // Step 1:  Create Ribbon Tab
 
                 try
-                {
-                a.CreateRibbonTab("test Tab");
-                }
-            catch (Exception)
-                {
-                Debug.Print("Tab Already Exist");
-                }
+                    {
+                    a.CreateRibbonTab("test Tab");
+                    }
+                catch (Exception)
+                    {
+                    Debug.Print("Tab Already Exist");
+                    }
 
             // Step 2:  Create Ribbon Panel
             //RibbonPanel curPanel = a.CreateRibbonPanel("Test Tab", "Test Panel");
-            RibbonPanel curPanel = CreateRibbonPanel(a, "Test Tab", "test Panel");
+            RibbonPanel curPanel = CreateRibbonPanel(a, "Test Tab", "Test Panel");
 
             // Step 3:  Create Button Data instances
 
@@ -57,10 +57,10 @@ namespace RevitAddinAcademy
         private RibbonPanel CreateRibbonPanel(UIControlledApplication a, string tabName, string panelName)
         {
             foreach(RibbonPanel tmpPanel in a.GetRibbonPanels(tabName))
-            {
-                if(tmpPanel.Name == panelName)
-                    return tmpPanel;
-            }
+                {
+                    if(tmpPanel.Name == panelName)
+                        return tmpPanel;
+                }
             RibbonPanel returnPanel = a.CreateRibbonPanel(tabName, panelName);
 
             return returnPanel;
