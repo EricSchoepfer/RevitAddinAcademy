@@ -8,7 +8,7 @@ using Autodesk.Revit.UI;
 using System.Diagnostics;
 using System.Reflection;
 using Autodesk.Revit.UI.Selection;
-
+using System.Media;
 
 
 
@@ -62,6 +62,7 @@ namespace RevitAddinAcademy
 
             //  Step 6:  Create Buttons
 
+            PushButton button1 = curRibbonPanel.AddItem(pData1) as PushButton;
 
 
 
@@ -100,5 +101,6 @@ namespace RevitAddinAcademy
         {
             return Result.Succeeded;
         }
+                
     }
 }
