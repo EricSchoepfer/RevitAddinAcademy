@@ -37,7 +37,7 @@ namespace RevitAddinAcademy
             Document doc = uidoc.Document;
 
             IList<Element> picklist = uidoc.Selection.PickElementsByRectangle("SELECT AREAS AND PERIMETERS");
-            List<Area> AreaList = new List<Area>();
+            List<SpatialElement> AreaList = new List<SpatialElement>();
 
 
 
@@ -47,17 +47,23 @@ namespace RevitAddinAcademy
             {
                 t.Start("Revit Areas");
 
-                foreach (Area Perimeter in picklist)
+                foreach (Element element in picklist)
                 {
+                    if (element is SpatialElement)
+                    {
+                        SpatialElement spatial = (SpatialElement)element;
 
+                        AreaList.Add(spatial);
+                    }
 
 
                 }
 
 
-            }
 
-            t.Commit();
+
+                t.Commit();
+            }
 
 
             TaskDialog.Show("Complete", AreaList.Count.ToString());
