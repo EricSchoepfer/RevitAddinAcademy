@@ -1,4 +1,4 @@
-#regio#region Namespaces
+#region Namespaces
 using Autodesk.Revit.ApplicationServices;
 using Autodesk.Revit.Attributes;
 using Autodesk.Revit.DB;
@@ -38,42 +38,49 @@ namespace RevitAddinAcademy
 
             IList<Element> picklist = uidoc.Selection.PickElementsByRectangle("SELECT AREAS AND PERIMETERS");
             List<SpatialElement> AreaList = new List<SpatialElement>();
-
-
-
+                               
 
             using (Transaction t = new Transaction(doc))
 
             {
                 t.Start("Revit Areas");
 
-                foreach (Element element in picklist)
                 {
-                    if (element is SpatialElement)
+                    foreach (Element element in picklist)
                     {
-                        SpatialElement spatial = (SpatialElement)element;
+                        if (element is SpatialElement)
+                        {
+                            SpatialElement spatial = (SpatialElement)element;
 
-                        AreaList.Add(spatial);
+                            AreaList.Add(spatial);
+                        }
+
+
                     }
 
+
+
+                  IList<IList<BoundarySegment>> GetBoundarySegments(SpatialElementBoundaryOptions options)
+                    {
+
+                    }
 
                 }
 
 
 
-
                 t.Commit();
             }
-
-
-            TaskDialog.Show("Complete", AreaList.Count.ToString());
-            return Result.Succeeded;
-
-
+                TaskDialog.Show("Complete", AreaList.Count.ToString());
+                return Result.Succeeded;
+            
         }
+
+        
 
         //Methods------------------------------------------------------------------
 
+       
 
     }
 
