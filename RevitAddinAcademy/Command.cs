@@ -38,7 +38,7 @@ namespace RevitAddinAcademy
 
             IList<Element> picklist = uidoc.Selection.PickElementsByRectangle("SELECT AREAS AND PERIMETERS");
             List<SpatialElement> AreaList = new List<SpatialElement>();
-                               
+            List<BoundarySegment> seglist = new List<BoundarySegment>();
 
             using (Transaction t = new Transaction(doc))
 
@@ -53,17 +53,18 @@ namespace RevitAddinAcademy
                             SpatialElement spatial = (SpatialElement)element;
 
                             AreaList.Add(spatial);
+
+                            SpatialElementBoundaryOptions options = new SpatialElementBoundaryOptions();
+
+                            IList<IList<BoundarySegment>> boundseg = spatial.GetBoundarySegments(options);
+
+                            boundseg.ToString();
+
                         }
 
 
                     }
 
-
-
-                  IList<IList<BoundarySegment>> GetBoundarySegments(SpatialElementBoundaryOptions options)
-                    {
-
-                    }
 
                 }
 
