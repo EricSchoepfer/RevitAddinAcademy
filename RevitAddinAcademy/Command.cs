@@ -40,41 +40,23 @@ namespace RevitAddinAcademy
             List<SpatialElement> AreaList = new List<SpatialElement>();
             List<BoundarySegment> seglist = new List<BoundarySegment>();
 
-            
+
+            {
+                foreach (Element element in picklist)
                 {
-                    foreach (Element element in picklist)
+                    if (element is SpatialElement)
                     {
-                        if (element is SpatialElement)
-                        {
-                            SpatialElement spatial = (SpatialElement)element;
+                        SpatialElement spatial = (SpatialElement)element;
 
-                            AreaList.Add(spatial);
+                        AreaList.Add(spatial);
 
-                            SpatialElementBoundaryOptions areas = new SpatialElementBoundaryOptions();
+                        SpatialElementBoundaryOptions areas = new SpatialElementBoundaryOptions();
 
-                            IList<IList<BoundarySegment>> boundseg = spatial.GetBoundarySegments(areas);
+                        IList<IList<BoundarySegment>> boundseg = spatial.GetBoundarySegments(areas);
 
-                             BoundarySegment seg = (seg.GetCurve);
-
-                            IList<IList<BoundarySegment>>  
                         
-                            foreach (CurveElement curv in boundseg)
-                            {
-                            if (curv != null)
-                                {
-                                seglist.Add(curv); 
-                                }
+                                                
 
-                                
-
-                            }
-
-
-                            
-                            
-                            
-                        }
-                        
 
                     }
 
@@ -82,23 +64,20 @@ namespace RevitAddinAcademy
                 }
 
 
-
-                
-            
                 TaskDialog.Show("Complete", AreaList.Count.ToString());
                 return Result.Succeeded;
-            
+
+            }
+
+
+
+            //Methods------------------------------------------------------------------
+
+
+
         }
 
-        
-
-        //Methods------------------------------------------------------------------
-
-       
-
     }
-
-
 
 }
 
