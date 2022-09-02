@@ -40,11 +40,7 @@ namespace RevitAddinAcademy
             List<SpatialElement> AreaList = new List<SpatialElement>();
             List<BoundarySegment> seglist = new List<BoundarySegment>();
 
-            using (Transaction t = new Transaction(doc))
-
-            {
-                t.Start("Revit Areas");
-
+            
                 {
                     foreach (Element element in picklist)
                     {
@@ -54,17 +50,31 @@ namespace RevitAddinAcademy
 
                             AreaList.Add(spatial);
 
-                            SpatialElementBoundaryOptions options = new SpatialElementBoundaryOptions();
+                            SpatialElementBoundaryOptions areas = new SpatialElementBoundaryOptions();
 
-                            IList<IList<BoundarySegment>> boundseg = spatial.GetBoundarySegments(options);
+                            IList<IList<BoundarySegment>> boundseg = spatial.GetBoundarySegments(areas);
 
-                            boundseg.ToString();
+                             BoundarySegment seg = (seg.GetCurve);
 
+                            IList<IList<BoundarySegment>>  
+                        
+                            foreach (CurveElement curv in boundseg)
+                            {
+                            if (curv != null)
+                                {
+                                seglist.Add(curv); 
+                                }
+
+                                
+
+                            }
+
+
+                            
+                            
+                            
                         }
-                        foreach (BoundarySegment boundseg in seglist)
-                        {
-
-                        }
+                        
 
                     }
 
@@ -73,8 +83,8 @@ namespace RevitAddinAcademy
 
 
 
-                t.Commit();
-            }
+                
+            
                 TaskDialog.Show("Complete", AreaList.Count.ToString());
                 return Result.Succeeded;
             
