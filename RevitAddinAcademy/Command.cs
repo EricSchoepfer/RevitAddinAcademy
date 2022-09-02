@@ -61,7 +61,10 @@ namespace RevitAddinAcademy
                             boundseg.ToString();
 
                         }
+                        foreach (BoundarySegment boundseg in seglist)
+                        {
 
+                        }
 
                     }
 
