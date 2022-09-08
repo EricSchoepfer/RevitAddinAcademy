@@ -4,7 +4,7 @@
     <Text>Command RevitAddinAcademy</Text>
     <Description>Some description for RevitAddinAcademy</Description>
     <Assembly>RevitAddinAcademy.dll</Assembly>
-    <FullClassName>RevitAddinAcademy.Command</FullClassName>
+    <FullClassName>RevitAddinAcademy.CmdInsertFurniture</FullClassName>
     <ClientId>75ad3d89-ce60-4597-8ccb-0462436e3cfb</ClientId>
     <VendorId>com.typepad.thebuildingcoder</VendorId>
     <VendorDescription>The Building Coder, http://thebuildingcoder.typepad.com</VendorDescription>

@@ -54,8 +54,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App.cs" />
+    <Compile Include="FurnitureData.cs" />
     <Compile Include="myClass.cs" />
-    <Compile Include="Command.cs" />
+    <Compile Include="CmdInsertFurniture.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
